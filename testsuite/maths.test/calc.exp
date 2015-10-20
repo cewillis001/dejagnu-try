@@ -7,6 +7,8 @@ set timeout 3
 #
 set test add1
 spawn ./maths
+send "2 5\n"
 expect {
-	-re "*"  { pass "$test" }
+	ERROR		 {fail "Error encountered.\n";}
+	"7"  { pass "$test"; }
 }

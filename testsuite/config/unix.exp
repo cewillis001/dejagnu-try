@@ -1,0 +1,33 @@
+# stuff
+
+if ![info exists prompt] then {
+	set prompt "maths: "
+}
+#
+# maths_load -- loads the program
+#
+proc maths_load { arg } {
+	#
+}
+
+#
+# maths_start -- start maths running
+#
+proc maths_start{} {
+	global CALC
+	global prompt
+	global spawn_id
+	global verbose
+
+	if {$verbose > 1} {
+		send_user "starting $MATHS\n"
+	}
+	spawn $MATHS
+	expect {
+		-re "No such file.*" { perror "Can't start $MATHS"; exit 1 }
+		-re "$prompts$" { }
+		timeout { perror "Failed to spawn $MATHS (timeout)"; exit 1}
+	}
+}
+
+maths_start

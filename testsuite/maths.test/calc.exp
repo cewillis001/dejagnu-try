@@ -1,0 +1,12 @@
+# attempt to use Expect to write tests for sample program
+# to do: edit test so it works without tool config
+
+set timeout 3
+#
+#tests
+#
+set test add1
+spawn ./maths
+expect {
+	-re "*"  { pass "$test" }
+}
